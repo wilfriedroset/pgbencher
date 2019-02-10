@@ -1,0 +1,16 @@
+---
+benchs:
+{% for result in bench_results.results %}
+  {{ result.item.get('name', loop.index) }}:
+    description: {{ result.item.get('description') }}
+    result:
+{{ result.stdout| from_json | to_nice_yaml(indent=2) |indent(width=6, indentfirst=True)}}
+    rc: {{ result.rc }}
+    stderr: |
+      "{{ result.stderr|safe}}"
+    params:
+{{ result.item| to_nice_yaml(indent=2) |indent(width=6, indentfirst=True)}}
+{% endfor %}
+
+server specs:
+{{ ansible_facts | to_nice_yaml(indent=2) | indent(width=2, indentfirst=True) }}

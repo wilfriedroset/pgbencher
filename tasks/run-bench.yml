@@ -1,0 +1,15 @@
+---
+- name: 'run pgbench'
+  shell: 'pgbench --builtin {{ item.bench }} --client {{ item.client }} --jobs {{ item.jobs }} {{ item.transactions }} {{ item.additional_options }} | /tmp/pgbench-parser.py'
+  environment:
+    PGPASSFILE: '{{ pgpassfile | mandatory }}'
+    PGDATABASE: "{{ pgdatabase | mandatory }}"
+    PGHOST: '{{ pghost | mandatory }}'
+    PGPORT: "{{ item.port | default(pgport) | mandatory }}"
+    PGUSER: "{{ pguser | mandatory }}"
+  loop: '{{ bench_plan }}'
+  register: bench_results
+  tags:
+    # ignoring Commands should not change things if nothing needs doing
+    # The purpose of this task is to be executed each time
+    - skip_ansible_lint

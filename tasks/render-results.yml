@@ -1,0 +1,7 @@
+---
+- name: rendering results as YAML
+  template:
+    src: templates/bench.yml.j2
+    # Render result to PWD
+    dest: "{{ lookup('env', 'PWD') }}/bench.{{ '%Y%m%dT%H:%M' | strftime(ansible_date_time.epoch) }}.yml"
+  delegate_to: localhost

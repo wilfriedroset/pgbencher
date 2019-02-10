@@ -1,0 +1,14 @@
+---
+- name: 'Only run "update_cache=yes" if the last one is more than 3600s ago'
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: 'Install postgresql related packages'
+  apt:
+    name: "{{ packages }}"
+    state: 'present'
+  vars:
+    packages:
+      - 'python-psycopg2'
+      - 'postgresql-contrib'

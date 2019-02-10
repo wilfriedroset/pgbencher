@@ -1,0 +1,14 @@
+---
+- name: 'initialization pgbench database'
+  command: 'pgbench -i -F {{ fillfactor | mandatory }} -s {{ scale_factor | mandatory }}'
+  environment:
+    PGPASSFILE: '{{ pgpassfile | mandatory }}'
+    PGDATABASE: "{{ pgdatabase | mandatory }}"
+    PGHOST: '{{ pghost | mandatory }}'
+    PGPORT: '{{ pgport | mandatory }}'
+    PGUSER: "{{ pguser | mandatory }}"
+  tags:
+    # ignoring Commands should not change things if nothing needs doing
+    # The purpose of this task is to be executed each time because we don't have
+    # a way to know if the database is initialized correctly
+    - skip_ansible_lint

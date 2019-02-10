@@ -1,0 +1,15 @@
+---
+- name: 'Create temp file'
+  tempfile:
+    state: file
+  register: temppgpass
+
+- name: 'setting pgpassfile value'
+  set_fact:
+    pgpassfile: '{{ temppgpass.path | mandatory }}'
+
+- name: 'Create temporary pgpass file'
+  template:
+    src: templates/pgpass.j2
+    dest: '{{ pgpassfile | mandatory }}'
+    mode: 0600

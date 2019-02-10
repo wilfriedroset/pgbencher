@@ -1,0 +1,17 @@
+---
+- name: 'Create bench database'
+  postgresql_db:
+    name: "{{ pgdatabase | mandatory }}"
+    login_host: '{{ pghost | mandatory }}'
+    port: "{{ pgport | mandatory }}"
+    # We are not using login_password in order to avoid involontary password
+    # logging. it came from PGPASSFILE
+  environment:
+    # Not define at playbook level because pg* variables cames from
+    # config.yml and/or default/main.yml which are not read when we define
+    # playbook environment variables
+    PGPASSFILE: '{{ pgpassfile | mandatory }}'
+    PGDATABASE: "{{ pgdatabase | mandatory }}"
+    PGHOST: '{{ pghost | mandatory }}'
+    PGPORT: '{{ pgport | mandatory }}'
+    PGUSER: "{{ pguser | mandatory }}"

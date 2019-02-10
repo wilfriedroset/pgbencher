@@ -1,0 +1,57 @@
+---
+pgdatabase: pgbench
+pghost: localhost
+pgport: 5432
+# in some case you might want to separate the read queries from the write (e.g. load balancing with HAproxy)
+pgport_ro: '{{ pgport }}'
+pgport_rw: '{{ pgport }}'
+
+pguser: postgres
+pgpass: FIXME
+
+fillfactor: 100
+scale_factor: 1
+
+additional_options: --vacuum-all -n -r
+client: 10
+jobs: 2
+
+bench_plan:
+  # A bench is define by
+  # bench: type of the bench to run, one of tpcb-libe, simple-update, select-only
+  # client: number of concurrent database clients
+  # jobs: number of threads
+  # transactions: number of transactions each client runs OR duration of benchmark test in seconds
+  #   transactions: '--transactions 100'
+  #   transactions: '--time 100'
+  # name (optional): name of the bench to easily identify it in summary file
+  # desciption (optional): description of the bench to easily understand the purpose of the bench
+  # port (optional): database server port number, will default to pgport
+  # additional_options (optional): others pgbench options, will default to none
+
+  - {name: 'bench 100 transaction on RW port',
+     description: 'Bench read-write performance',
+     bench: 'tpcb-like',
+     port: '{{ pgport_rw }}',
+     client: '{{ client }}',
+     jobs: '{{ jobs }}',
+     transactions: '--transactions 100',
+     additional_options: '{{ additional_options }}'}
+
+  - {name: 'bench for 100 seconds',
+     description: 'Bench read-write performance during a given period',
+     bench: 'tpcb-like',
+     port: '{{ pgport_rw }}',
+     client: '{{ client }}',
+     jobs: '{{ jobs }}',
+     transactions: '--time 100',
+     additional_options: '{{ additional_options }}'}
+
+  - {name: 'bench 100 transactions on RO port',
+     description: 'Bench read-only performance',
+     bench: 'select-only',
+     port: '{{ pgport_ro }}',
+     client: '{{ client }}',
+     jobs: '{{ jobs }}',
+     transactions: '--transactions 100',
+     additional_options: '{{ additional_options }}'}

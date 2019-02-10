@@ -1,0 +1,5 @@
+---
+- name: 'Remove temp pgpassfile'
+  file:
+    name: '{{ pgpassfile | mandatory }}'
+    state: absent

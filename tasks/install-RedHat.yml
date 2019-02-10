@@ -1,0 +1,10 @@
+---
+- name: 'Install postgresql related packages'
+  yum:
+    name: "{{ packages }}"
+    state: 'present'
+    update_cache: true
+  vars:
+    packages:
+      - 'python-psycopg2'
+      - 'postgresql-contrib'

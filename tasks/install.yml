@@ -1,0 +1,12 @@
+---
+- name: 'copy pgbench output parser script'
+  copy:
+    src: files/pgbench-parser.py
+    dest: /tmp/pgbench-parser.py
+    mode: 0755
+
+- include_tasks: install-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- include_tasks: install-RedHat.yml
+  when: ansible_os_family == 'RedHat'

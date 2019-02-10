@@ -1,0 +1,25 @@
+---
+- hosts: 'all'
+  connection: local
+
+  pre_tasks:
+    - include_tasks: tasks/install.yml
+
+    - name: Including defaults vars
+      include_vars: defaults/main.yml
+
+    - name: Including custom vars
+      include_vars: config.yml
+      # optional, user might not want to redefine all variables
+      ignore_errors: true
+
+    - include_tasks: tasks/setup-pgpassfile.yml
+    - include_tasks: tasks/create-database.yml
+
+  tasks:
+    - include_tasks: tasks/init-database.yml
+    - include_tasks: tasks/run-bench.yml
+    - include_tasks: tasks/render-results.yml
+
+  post_tasks:
+    - include_tasks: tasks/clean-pgpassfile.yml
