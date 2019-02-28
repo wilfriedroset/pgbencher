@@ -51,8 +51,8 @@ pgbench related parameters:
 Have a look to the official documentation for more information:
 https://www.postgresql.org/docs/11/pgbench.html
 
-A bench if define as a dictionary with:
-* **bench**: type of the bench to run, one of tpcb-libe, simple-update, select-only
+A bench is defined as a dictionary with:
+* **bench**: type of the bench to run, one of tpcb-like, simple-update, select-only
 * **client**: number of concurrent database clients
 * **jobs**: number of threads
 * **transactions**: number of transactions each client runs OR duration of benchmark test in seconds

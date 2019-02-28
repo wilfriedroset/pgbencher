@@ -17,7 +17,7 @@ client: 10
 jobs: 2
 
 bench_plan:
-  # A bench is define by
+  # A bench is defined by
   # bench: type of the bench to run, one of tpcb-libe, simple-update, select-only
   # client: number of concurrent database clients
   # jobs: number of threads

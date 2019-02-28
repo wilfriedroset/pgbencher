@@ -7,7 +7,7 @@
     # We are not using login_password in order to avoid involontary password
     # logging. it came from PGPASSFILE
   environment:
-    # Not define at playbook level because pg* variables cames from
+    # Not defined at playbook level because pg* variables come from
     # config.yml and/or default/main.yml which are not read when we define
     # playbook environment variables
     PGPASSFILE: '{{ pgpassfile | mandatory }}'
