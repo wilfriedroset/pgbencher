@@ -3,6 +3,7 @@
   postgresql_db:
     name: "{{ pgdatabase | mandatory }}"
     login_host: '{{ pghost | mandatory }}'
+    login_user: "{{ pguser | mandatory }}"
     port: "{{ pgport | mandatory }}"
     # We are not using login_password in order to avoid involontary password
     # logging. it came from PGPASSFILE
