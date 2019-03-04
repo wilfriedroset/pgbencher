@@ -80,7 +80,7 @@ bench_plan:
 
 Once configured, you can execute the playbook
 ```
-ansible-playbook -i <host>, /mnt/main.yml
+ansible-playbook -i <host>, ./main.yml
 ```
 Where *host* is the fqdn from which you want to run the bench.
 The playbook will generate a result file formated as yaml on the host from which
