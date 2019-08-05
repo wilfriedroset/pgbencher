@@ -1,6 +1,7 @@
 # PGbencher
 
 This playbook intend to simplify bench process for PostgreSQL database.
+We have tested it with ansible 2.8.
 
 ## Dependencies
 
@@ -18,7 +19,18 @@ yum install -y epel-release && yum install -y python-pip
 
 Then install latest ansible and psycopg2
 ```
-pip install ansible psycopg2
+pip install -U ansible psycopg2
+```
+
+Check ansible version
+```
+ansible --version
+ansible 2.8.3
+  config file = None
+  configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/local/lib/python2.7/dist-packages/ansible
+  executable location = /usr/local/bin/ansible
+  python version = 2.7.13 (default, Sep 26 2018, 18:42:22) [GCC 6.3.0 20170516]
 ```
 
 ## Installation and Configuration
