@@ -82,14 +82,16 @@ def main():
     bench_result = {}
     for line in raw_benchresult:
 
-        # don't take care of script statistics
-        if 'script statistics' in line:
+        # don't take care of script statistics for pgbench 9.6+
+        if 'script statistics' in line or 'statement latencies in milliseconds' in line:
             break
         # ignore blank lines
         if not line:
             continue
 
-        line = [e.strip() for e in line.replace('=', ':').split(':')]
+        line = [e.strip() for e in line.replace('=', ':').split(':') if e.strip()]
+        if len(line) != 2:
+            continue
 
         # Parse --> number of transactions actually processed: 1000/1000
         if 'number of transactions actually processed' in line:
