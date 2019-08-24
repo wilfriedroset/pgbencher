@@ -15,5 +15,4 @@
     update_cache: true
   vars:
     packages:
-      - 'python-psycopg2'
       - 'postgresql-contrib'

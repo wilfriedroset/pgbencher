@@ -18,5 +18,4 @@
     state: 'present'
   vars:
     packages:
-      - 'python-psycopg2'
       - 'postgresql-contrib'

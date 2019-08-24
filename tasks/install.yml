@@ -10,3 +10,7 @@
 
 - include_tasks: install-RedHat.yml
   when: ansible_os_family == 'RedHat'
+
+- name: 'install python package'
+  pip:
+    name: 'psycopg2-binary'
