@@ -1,4 +1,13 @@
 ---
+- name: 'Install system related packages'
+  yum:
+    name: "{{ packages }}"
+    state: 'present'
+    update_cache: true
+  vars:
+    packages:
+      - 'python-pip'
+
 - name: 'Install postgresql related packages'
   yum:
     name: "{{ packages }}"
