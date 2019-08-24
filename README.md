@@ -17,9 +17,9 @@ Red-Hat based
 yum install -y epel-release && yum install -y python-pip
 ```
 
-Then install latest ansible and psycopg2
+Then install latest ansible
 ```
-pip install -U ansible psycopg2
+pip install -U ansible>=2.8.3
 ```
 
 Check ansible version
@@ -193,9 +193,21 @@ which you have run the bench. This is basically the content of *ansible_facts*.
 
 ## Local test using docker
 
+### Spawn a postgresql
 ```
 docker run --rm --name some-postgres -e POSTGRES_PASSWORD=$PASS -d postgres
+```
+
+### Test on Debian
+```
 docker run --rm -v $PWD:/mnt -it --link some-postgres:postgres debian:stretch bash
-apt update && apt -y install python-pip && pip install -q psycopg2 ansible
+apt update && apt -y install python-pip && pip install -q ansible>=2.8.3
+ansible-playbook -i localhost, /mnt/main.yml
+```
+
+### Test on Centos
+```
+docker run --rm -v $PWD:/mnt -it --link some-postgres:postgres centos:7 bash
+yum install -y epel-release && yum install -y python-pip && pip install -q ansible>=2.8.3
 ansible-playbook -i localhost, /mnt/main.yml
 ```
