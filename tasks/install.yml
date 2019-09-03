@@ -14,3 +14,4 @@
 - name: 'install python package'
   pip:
     name: 'psycopg2-binary'
+    extra_args: --user
