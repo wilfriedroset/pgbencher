@@ -95,7 +95,7 @@ def main():
 
         # Parse --> number of transactions actually processed: 1000/1000
         if 'number of transactions actually processed' in line:
-            label = 'number of transactions actually processed'
+            label = 'percentage of transactions actually processed'
             value = eval(line[1]) * 100  # percentage of executed queries
 
         elif 'tps' in line:
